@@ -11,7 +11,6 @@ Welcome to [Horizon](https://github.com/thysrael/Horizon), an AI-driven informat
 
 - [Source Scrapers](scrapers) — How Horizon collects content from GitHub, Hacker News, RSS, Twitter/X, and Reddit
 - [Scoring System](scoring) — AI-based content analysis and the 0–10 scoring scale
-- [Recommendation System](recommendations) — Automatic discovery of new sources to follow
 
 ## Latest Summaries
 
