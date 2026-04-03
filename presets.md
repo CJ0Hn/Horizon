@@ -24,6 +24,8 @@ Horizon 内置了一套精心整理的信息源预设库，覆盖多个技术领
 | RSS | Simon Willison | LLM 工具与实验 |
 | GitHub | @karpathy | AI 教育者与研究者 |
 | GitHub | vllm-project/vllm | 高吞吐量大模型推理引擎 |
+| RSS | 量子位 | AI 资讯与前沿报道（微信公众号） |
+| RSS | 新智元 | AI 资讯、模型发布与行业洞察（微信公众号） |
 
 ### 🖥️ 系统 / 基础设施
 
@@ -138,6 +140,8 @@ You can also browse the list below and manually add sources to your `data/config
 | RSS | Simon Willison | LLM tools and experiments |
 | GitHub | @karpathy | AI educator and researcher |
 | GitHub | vllm-project/vllm | High-throughput LLM serving engine |
+| RSS | QbitAI (量子位) | Chinese AI news and research coverage |
+| RSS | AI新智元 | Chinese AI news, model releases and industry insights |
 
 ### 🖥️ Systems / Infrastructure
 
