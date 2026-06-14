@@ -11,7 +11,7 @@ title: Home
 
 ## 文档
 
-- [配置指南](configuration) — AI 提供商、信息源、过滤规则与环境变量替换
+- [配置指南](configuration-zh) — AI 提供商、信息源、过滤规则与环境变量替换
 - [信息源采集器](scrapers) — Horizon 如何从 GitHub、Hacker News、RSS、Reddit 采集内容
 - [评分系统](scoring) — 基于 AI 的内容分析与 0-10 评分体系
 
