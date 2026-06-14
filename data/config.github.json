@@ -1,57 +1,67 @@
 {
   "version": "1.0",
   "ai": {
-    "provider": "openai",
-    "model": "gpt-4",
-    "api_key_env": "OPENAI_API_KEY",
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "api_key_env": "DEEPSEEK_API_KEY",
     "temperature": 0.3,
-    "max_tokens": 4096,
+    "max_tokens": 8192,
     "throttle_sec": 0,
-    "analysis_concurrency": 1,
-    "enrichment_concurrency": 1
-  },
-  "email": {
-    "enabled": false,
-    "smtp_server": "smtp.qq.com",
-    "smtp_port": 465,
-    "imap_server": "imap.qq.com",
-    "imap_port": 993,
-    "email_address": "xxx@qq.com",
-    "sender_name": "Horizon Daily",
-    "subscribe_keyword": "SUBSCRIBE",
-    "unsubscribe_keyword": "UNSUBSCRIBE"
+    "analysis_concurrency": 4,
+    "enrichment_concurrency": 4,
+    "languages": [
+      "zh"
+    ]
   },
   "sources": {
     "github": [
       {
         "type": "user_events",
         "username": "torvalds",
-        "enabled": true
+        "enabled": false
       },
       {
         "type": "repo_releases",
         "owner": "astral-sh",
         "repo": "uv",
-        "enabled": true
+        "enabled": false
       }
     ],
     "hackernews": {
       "enabled": true,
-      "fetch_top_stories": 20,
+      "fetch_top_stories": 10,
       "min_score": 100
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
+        "name": "IT之家",
+        "url": "https://www.ithome.com/rss",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "科技资讯"
       },
       {
-        "name": "LWN.net (subscriber full-text)",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
-        "enabled": false,
-        "category": "linux"
+        "name": "36氪",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "科技资讯"
+      },
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/feed",
+        "enabled": true,
+        "category": "科技资讯"
+      },
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/rss/index.xml",
+        "enabled": true,
+        "category": "科技资讯"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://blog.google/technology/ai/rss/",
+        "enabled": true,
+        "category": "AI"
       }
     ],
     "reddit": {
@@ -64,12 +74,20 @@
           "time_filter": "day",
           "fetch_limit": 15,
           "min_score": 50
+        },
+        {
+          "subreddit": "AI",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 15,
+          "min_score": 50
         }
       ],
       "users": [
         {
           "username": "iamthatis",
-          "enabled": true,
+          "enabled": false,
           "sort": "new",
           "fetch_limit": 10
         }
@@ -102,59 +120,36 @@
     },
     "ossinsight": {
       "enabled": false,
-      "period": "past_24_hours",
-      "languages": ["All", "Python", "TypeScript"],
-      "keywords": [],
-      "min_stars": 10,
+      "period": "past_month",
+      "languages": ["All"],
+      "keywords": ["ai"],
+      "min_stars": 100,
       "max_items": 30
     }
   },
   "filtering": {
-    "ai_score_threshold": 6.0,
+    "ai_score_threshold": 7.0,
     "time_window_hours": 24,
     "max_items": null,
     "category_groups": {},
     "default_group": "other",
     "default_group_limit": null
   },
+  "email": null,
   "webhook": {
-    "enabled": false,
+    "enabled": true,
     "url_env": "HORIZON_WEBHOOK_URL",
-    "delivery": "summary",
-    "overview_position": "first",
-    "platform": "generic",
+    "delivery": "summary_and_items",
+    "overview_position": "last",
+    "platform": "dingtalk",
     "layout": "markdown",
     "fallback_layout": "markdown",
-    "languages": null,
+    "languages": ["zh"],
     "request_body": {
-      "msg_type": "interactive",
-      "card": {
-        "schema": "2.0",
-        "config": {
-          "wide_screen_mode": true
-        },
-        "header": {
-          "title": {
-            "tag": "plain_text",
-            "content": "#{message_title}"
-          },
-          "template": "blue"
-        },
-        "body": {
-          "elements": [
-            {
-              "tag": "markdown",
-              "content": "Horizon生成结果: #{result}\nHorizon日报重要资讯数量: #{important_items}/#{all_items}"
-            },
-            {
-              "tag": "hr"
-            },
-            {
-              "tag": "markdown",
-              "content": "#{summary}"
-            }
-          ]
-        }
+      "msgtype": "markdown",
+      "markdown": {
+        "title": "每日速递 #{message_title}",
+        "text": "每日速递 #{date}\n\n重要资讯: #{important_items}/#{all_items}\n\n#{summary?limit=3000&split=---}"
       }
     },
     "headers": ""
