@@ -96,9 +96,15 @@
       var path = window.location.pathname;
       var target = null;
       if (lang === 'en' && /-zh(?:\.html)?$/.test(path.replace(/\/$/, ''))) {
-        target = path.replace(/-zh(\.html)?$/, '-en$1').replace(/-zh\/$/, '-en/');
+        target = path.replace(/-zh(\.html)?$/, '$1').replace(/-zh\/$/, '/');
       } else if (lang === 'zh' && /-en(?:\.html)?$/.test(path.replace(/\/$/, ''))) {
         target = path.replace(/-en(\.html)?$/, '-zh$1').replace(/-en\/$/, '-zh/');
+      } else if (lang === 'zh' && !/-(?:en|zh)(?:\.html)?$/.test(path.replace(/\/$/, ''))) {
+        if (/\.html$/.test(path)) {
+          target = path.replace(/\.html$/, '-zh.html');
+        } else {
+          target = path.replace(/\/?$/, '-zh/');
+        }
       }
       if (target) window.location.href = target;
     }
